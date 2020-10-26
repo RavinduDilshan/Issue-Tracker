@@ -5,14 +5,28 @@
 
         <br>
         <h1>All Projects</h1>
-        <div v-if="role==customer">
+        <div v-if="role==modular">
             <b-button variant="danger">Add Project</b-button>
           </div>
         
        
 
         <div>
-    <b-table striped hover :items="items"></b-table>
+    <table style="width:100%">
+  <tr>
+    <th>Project Name</th>
+    <th>Status</th>
+    <th>Case Count</th>
+    <th>Issue Count</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+    <td>8</td>
+  </tr>
+</table>
+
     </div>
 
 
@@ -23,7 +37,7 @@
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 import Header from './layout/Header'
 
  
@@ -35,20 +49,27 @@ export default {
     },
 
     mounted(){
+
+      axios.get('http://localhost:3000/api/test/projects')
+      .then(function(response){
+        console.log(response.data);
+       
+        
+        
+
+      }).catch(err=>{
+        console.log(err)
+      })
+      ;
        
     },
 
        data() {
       return {
+       
         x:localStorage.getItem("user"),
       role:localStorage.getItem("role"),
      
-        items: [
-          { project_name: 40, status: 'Dickerson', cases_count: 'Macdonald' ,issue_count:'3'},
-          { project_name: 21, status: 'Larsen', cases_count: 'Shaw',issue_count:'3' },
-          { project_name: 89, status: 'Geneva', cases_count: 'Wilson',issue_count:'3' },
-          { project_name: 38, status: 'Jami', cases_count: 'Carney',issue_count:'3' }
-        ]
       }
     }
     
@@ -59,6 +80,10 @@ export default {
 
 .pageComponent{
     text-align:center;
+}
+
+table, th, td {
+  border: 1px solid black;
 }
 
 </style>
