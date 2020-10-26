@@ -75,7 +75,14 @@ export default {
         console.log(response.data);
 
         if(response.data.message=='success'){
-         window.location.href = '/userdash'
+
+           localStorage.setItem("user", response.data.session);
+           localStorage.setItem("role",response.data.role);
+
+          window.location.href = '/userdash';
+
+
+
 
         }
         

@@ -2,6 +2,7 @@
 
     <header class="header">
         <h1>Issue Tracker</h1>
+        <h5>wellcome {{x}}</h5>
         <b-button variant="success">Logout</b-button>
     </header>
 
@@ -18,6 +19,12 @@
 <script>
 export default {
     name:"Header",
+     data() {
+      return {
+        x:localStorage.getItem("user")
+       
+      }
+    }
 }
 </script>
 

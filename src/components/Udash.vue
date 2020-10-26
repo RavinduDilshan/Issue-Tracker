@@ -5,6 +5,11 @@
 
         <br>
         <h1>All Projects</h1>
+        <div v-if="role==customer">
+            <b-button variant="danger">Add Project</b-button>
+          </div>
+        
+       
 
         <div>
     <b-table striped hover :items="items"></b-table>
@@ -18,8 +23,11 @@
 </template>
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 import Header from './layout/Header'
+
+ 
+
 export default {
     name:'Udash',
     components:{
@@ -27,23 +35,14 @@ export default {
     },
 
     mounted(){
-        axios({
-              method: 'get',
-              url: 'http://localhost/api/test/yo'
-            })
-            .then(response => {
-              console.log(response)
-              this.response = true
-
-            })
-            .catch(error => {
-              console.log(error)
-              this.errored = true
-            })
+       
     },
 
        data() {
       return {
+        x:localStorage.getItem("user"),
+      role:localStorage.getItem("role"),
+     
         items: [
           { project_name: 40, status: 'Dickerson', cases_count: 'Macdonald' ,issue_count:'3'},
           { project_name: 21, status: 'Larsen', cases_count: 'Shaw',issue_count:'3' },
