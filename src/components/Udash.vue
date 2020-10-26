@@ -5,7 +5,7 @@
 
         <br>
         <h1>All Projects</h1>
-        <div v-if="role==modular">
+        <div v-if="role=='modular'">
             <b-button variant="danger">Add Project</b-button>
           </div>
         
@@ -18,12 +18,25 @@
     <th>Status</th>
     <th>Case Count</th>
     <th>Issue Count</th>
+    <th> Actions</th>
   </tr>
   <tr v-for="item in list" v-bind:key="item.projectId">
     <td>{{item.projectName}}</td>
     <td>{{item.status}}</td>
     <td>{{item.caseCount}}</td>
     <td>{{item.IssueCount}}</td>
+    <td>
+      <div v-if="role=='modular'">Start
+        Cancel
+      </div>
+     <a href="/propage">View</a>
+
+      
+
+    
+    
+    
+    </td>
   </tr>
 </table>
 
@@ -47,16 +60,6 @@ export default {
     components:{
         Header
     },
-       data() {
-      return {
-
-
-       list:[],
-        x:localStorage.getItem("user"),
-      role:localStorage.getItem("role"),
-     
-      }
-    },
      mounted(){
 
       axios.get('http://localhost:3000/api/test/projects')
@@ -72,7 +75,19 @@ export default {
       })
       ;
        
-    }
+    },
+       data() {
+      return {
+
+
+       list:[],
+        x:localStorage.getItem("user"),
+        role:localStorage.getItem("role"),
+    
+     
+      }
+    },
+    
     
 }
 </script>

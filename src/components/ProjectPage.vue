@@ -8,10 +8,42 @@
         <h2>Cases Of This Project</h2>
 
         <div>
-    <b-table striped hover :items="items"></b-table>
+    
     </div>
 
 
+
+    </div>
+
+    
+        <div>
+    <table style="width:100%">
+  <tr>
+    <th>Project Name</th>
+    <th>Status</th>
+    <th>Case Count</th>
+    <th>Issue Count</th>
+    <th> Actions</th>
+  </tr>
+  <tr v-for="item in list" v-bind:key="item.projectId">
+    <td>{{item.caseId}}</td>
+    <td>{{item.status}}</td>
+    <td>{{item.description}}</td>
+    <td>{{item.issueNo}}</td>
+    <td>
+      <!-- <div v-if="role=='modular'">Start
+        Cancel
+      </div> -->
+     <a href="/issue">View</a>
+
+      
+
+    
+    
+    
+    </td>
+  </tr>
+</table>
 
     </div>
 
@@ -66,22 +98,35 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from './layout/Header'
 export default {
     name:'ProjectPage',
     components:{
         Header
     },
+    mounted(){
+
+      axios.get('http://localhost:3000/api/test/cases')
+      .then((response)=>{
+        console.log(response.data);
+        this.list=response.data;
+      
+        
+        
+
+      }).catch(err=>{
+        console.log(err)
+      })
+      ;
+       
+    },
 
        data() {
       return {
           comment:'',
-        items: [
-          { case: 40, status: 'Dickerson', description: 'Macdonald' ,issue_count:'3'},
-          { case: 21, status: 'Larsen', description: 'Shaw',issue_count:'3' },
-          { case: 89, status: 'Geneva', description: 'Wilson',issue_count:'3' },
-          { case: 38, status: 'Jami', description: 'Carney',issue_count:'3' }
-        ]
+          list:[]
+      
       }
     }
     
@@ -92,6 +137,10 @@ export default {
 
 .pageComponent{
     text-align:center;
+}
+
+table, th, td {
+  border: 1px solid black;
 }
 
 </style>
