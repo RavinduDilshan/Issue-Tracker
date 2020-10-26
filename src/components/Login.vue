@@ -1,3 +1,4 @@
+
 <template>
   <div id="About">
     <b-container>
@@ -15,7 +16,7 @@
                 
                 label="User Name"
                 >
-                <b-form-input v-model="user_name" required></b-form-input>
+                <b-form-input v-model="username" required></b-form-input>
                 </b-form-group>
                 
                 <!-- password -->
@@ -23,7 +24,7 @@
                 
                 label="Password"
                 >
-                <b-form-input v-model="Password" required type="password"></b-form-input>
+                <b-form-input v-model="password" required type="password"></b-form-input>
                 </b-form-group>
 
                 <!-- submit -->
@@ -51,11 +52,13 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data(){
     return{
-      user_name:'',
-      Password:''
+      username:'',
+      password:'',
+      apidata:''
     }
   },
 
@@ -63,7 +66,23 @@ export default {
 
     onSubmit(event){
       event.preventDefault()
-      alert(this.user_name + ' ' + this.Password)
+      alert(this.username + ' ' + this.password)
+
+      axios.post('http://localhost:3000/api/test/auth',{
+        username:this.username,
+        password:this.password
+      }).then(function(response){
+        console.log(response.data);
+
+        if(response.data.message=='success'){
+         window.location.href = '/userdash'
+
+        }
+        
+
+      }).catch(err=>{
+        console.log(err)
+      });
 
     }
   }

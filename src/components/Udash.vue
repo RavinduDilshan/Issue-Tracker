@@ -18,11 +18,28 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from './layout/Header'
 export default {
     name:'Udash',
     components:{
         Header
+    },
+
+    mounted(){
+        axios({
+              method: 'get',
+              url: 'http://localhost/api/test/yo'
+            })
+            .then(response => {
+              console.log(response)
+              this.response = true
+
+            })
+            .catch(error => {
+              console.log(error)
+              this.errored = true
+            })
     },
 
        data() {
