@@ -4,12 +4,34 @@
     <div class="pageComponent">
 
         <br>
-        <h1>Issue Name</h1>
-        <h2>Project:project1 Case:case1</h2>
+        <h1>Issue Id:{{id}}</h1>
+      
         
 
         <div>
-    <b-table striped hover :items="items"></b-table>
+   <table style="width:100%">
+  <tr>
+    <th>Description</th>
+    <th>Status</th>
+    <th> Actions</th>
+  </tr>
+  <tr v-for="item in list" v-bind:key="item.issueId">
+    <td>{{item.description}}</td>
+    <td>{{item.status}}</td>
+    <td>
+      <!-- <div v-if="role=='modular'">Start
+        Cancel
+      </div> -->
+  <a v-bind:href="'/case/'+item.caseId">View</a>
+
+      
+
+    
+    
+    
+    </td>
+  </tr>
+</table>
     </div>
 
 
@@ -67,20 +89,38 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from './layout/Header'
 export default {
     name:'IssuePage',
     components:{
         Header
     },
+    mounted(){
+
+      axios.get('http://localhost:3000/api/test/issues/'+this.id
+       
+      )
+      .then((response)=>{
+        console.log(response.data);
+        this.list=response.data;
+        console.log(this.id);
+      
+        
+        
+
+      }).catch(err=>{
+        console.log(err)
+      })
+      ;
+       
+    },
 
        data() {
       return {
           comment:'',
-        items: [
-          {  status: 'Dickerson',type:'', description: 'Macdonald'},
-          
-        ]
+        list:[],
+          id:this.$route.params.id
       }
     }
     

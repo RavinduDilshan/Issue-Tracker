@@ -28,7 +28,7 @@
         Cancel
       </div>
       
-     <a v-bind:href="'/propage/'+item.projectId">View</a>
+     <a v-bind:href="'/issue/'+item.issueId">View</a>
     
 
       

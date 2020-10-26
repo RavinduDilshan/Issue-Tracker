@@ -30,7 +30,7 @@ const routes=[
   {path:'/userdash',component:Udash},
   {path:'/propage/:id',component:ProjectPage},
   {path:'/case/:id',component:CasePage},
-  {path:'/issue',component:IssuePage}
+  {path:'/issue/:id',component:IssuePage}
 
 
 ];
