@@ -4,14 +4,41 @@
     <div class="pageComponent">
 
         <br>
-        <h1>Case Name</h1>
+        <h1>Case Id {{id}}</h1>
         <b-container>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro veritatis maxime similique ipsa illo voluptatibus unde fugiat vitae fuga. Itaque aspernatur ducimus, alias dicta repellat nam ab fugit quasi enim!</p>
         </b-container>
-        <h1>Issues of this case of this project</h1>
+        <h1>Issues of this case </h1>
 
         <div>
-    <b-table striped hover :items="items"></b-table>
+    <table style="width:100%">
+  <tr>
+    <th>Issue Id</th>
+    <th>Status</th>
+    <th>Description</th>
+    <th> Actions</th>
+  </tr>
+  <tr v-for="item in list" v-bind:key="item.issueId">
+    <td>{{item.issueId}}</td>
+    <td>{{item.status}}</td>
+    <td>{{item.description}}</td>
+    
+    <td>
+      <div v-if="role=='modular'">Start
+        Cancel
+      </div>
+      
+     <a v-bind:href="'/propage/'+item.projectId">View</a>
+    
+
+      
+
+    
+    
+    
+    </td>
+  </tr>
+</table>
     </div>
 
 
@@ -69,6 +96,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from './layout/Header'
 export default {
     name:'CasePage',
@@ -76,15 +104,32 @@ export default {
         Header
     },
 
+    mounted(){
+
+      axios.get('http://localhost:3000/api/test/issues/'+this.id
+       
+      )
+      .then((response)=>{
+        console.log(response.data);
+        this.list=response.data;
+        console.log(this.id);
+      
+        
+        
+
+      }).catch(err=>{
+        console.log(err)
+      })
+      ;
+       
+    },
+
+
        data() {
       return {
           comment:'',
-        items: [
-          { issue: 40, status: 'Dickerson', type:'type',description: 'Macdonald'},
-          { issue: 21, status: 'Larsen',type:'type', description: 'Shaw'},
-          { issue: 89, status: 'Geneva', type:'type',description: 'Wilson' },
-          { issue: 38, status: 'Jami', type:'type',description: 'Carney' }
-        ]
+           list:[],
+          id:this.$route.params.id
       }
     }
     

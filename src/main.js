@@ -28,8 +28,8 @@ const routes=[
   {path:'/',component:Home},
   {path:'/login',component:Login},
   {path:'/userdash',component:Udash},
-  {path:'/propage',component:ProjectPage},
-  {path:'/case',component:CasePage},
+  {path:'/propage/:id',component:ProjectPage},
+  {path:'/case/:id',component:CasePage},
   {path:'/issue',component:IssuePage}
 
 

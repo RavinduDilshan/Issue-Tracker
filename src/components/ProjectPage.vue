@@ -4,8 +4,9 @@
     <div class="pageComponent">
 
         <br>
-        <h1>Project Name</h1>
+        <h1>Project Id : {{this.id}}</h1>
         <h2>Cases Of This Project</h2>
+        
 
         <div>
     
@@ -19,9 +20,9 @@
         <div>
     <table style="width:100%">
   <tr>
-    <th>Project Name</th>
+    <th>Case Id</th>
     <th>Status</th>
-    <th>Case Count</th>
+    <th>Description</th>
     <th>Issue Count</th>
     <th> Actions</th>
   </tr>
@@ -34,7 +35,7 @@
       <!-- <div v-if="role=='modular'">Start
         Cancel
       </div> -->
-     <a href="/issue">View</a>
+  <a v-bind:href="'/case/'+item.caseId">View</a>
 
       
 
@@ -47,7 +48,8 @@
 
     </div>
 
-   
+   <br>
+   <br>
 
     <!-- comment section -->
     
@@ -107,10 +109,13 @@ export default {
     },
     mounted(){
 
-      axios.get('http://localhost:3000/api/test/cases')
+      axios.get('http://localhost:3000/api/test/cases/'+this.id
+       
+      )
       .then((response)=>{
         console.log(response.data);
         this.list=response.data;
+        console.log(this.id);
       
         
         
@@ -125,7 +130,8 @@ export default {
        data() {
       return {
           comment:'',
-          list:[]
+          list:[],
+          id:this.$route.params.id
       
       }
     }

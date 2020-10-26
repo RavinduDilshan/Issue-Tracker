@@ -29,7 +29,9 @@
       <div v-if="role=='modular'">Start
         Cancel
       </div>
-     <a href="/propage">View</a>
+      
+     <a v-bind:href="'/propage/'+item.projectId">View</a>
+    
 
       
 
@@ -66,6 +68,7 @@ export default {
       .then((response)=>{
         console.log(response.data);
         this.list=response.data;
+       
       
         
         
@@ -83,6 +86,7 @@ export default {
        list:[],
         x:localStorage.getItem("user"),
         role:localStorage.getItem("role"),
+        id:'2',
     
      
       }
