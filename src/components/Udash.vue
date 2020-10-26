@@ -15,6 +15,7 @@
     <table style="width:100%">
   <tr>
     <th>Project Name</th>
+    <th>Description</th>
     <th>Status</th>
     <th>Case Count</th>
     <th>Issue Count</th>
@@ -22,6 +23,7 @@
   </tr>
   <tr v-for="item in list" v-bind:key="item.projectId">
     <td>{{item.projectName}}</td>
+    <td>{{item.description}}</td>
     <td>{{item.status}}</td>
     <td>{{item.caseCount}}</td>
     <td>{{item.IssueCount}}</td>

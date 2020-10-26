@@ -7,6 +7,7 @@ import Udash from './components/Udash'
 import ProjectPage from './components/ProjectPage'
 import CasePage from './components/CasePage'
 import IssuePage from './components/IssuePage'
+import AddProject from './components/AddProject'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
@@ -30,7 +31,8 @@ const routes=[
   {path:'/userdash',component:Udash},
   {path:'/propage/:id',component:ProjectPage},
   {path:'/case/:id',component:CasePage},
-  {path:'/issue/:id',component:IssuePage}
+  {path:'/issue/:id',component:IssuePage},
+  {path:'/addpro',component:AddProject}
 
 
 ];
