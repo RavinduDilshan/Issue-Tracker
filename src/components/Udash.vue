@@ -19,11 +19,11 @@
     <th>Case Count</th>
     <th>Issue Count</th>
   </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-    <td>8</td>
+  <tr v-for="item in list" v-bind:key="item.projectId">
+    <td>{{item.projectName}}</td>
+    <td>{{item.status}}</td>
+    <td>{{item.caseCount}}</td>
+    <td>{{item.IssueCount}}</td>
   </tr>
 </table>
 
@@ -47,13 +47,23 @@ export default {
     components:{
         Header
     },
+       data() {
+      return {
 
-    mounted(){
+
+       list:[],
+        x:localStorage.getItem("user"),
+      role:localStorage.getItem("role"),
+     
+      }
+    },
+     mounted(){
 
       axios.get('http://localhost:3000/api/test/projects')
-      .then(function(response){
+      .then((response)=>{
         console.log(response.data);
-       
+        this.list=response.data;
+      
         
         
 
@@ -62,15 +72,6 @@ export default {
       })
       ;
        
-    },
-
-       data() {
-      return {
-       
-        x:localStorage.getItem("user"),
-      role:localStorage.getItem("role"),
-     
-      }
     }
     
 }
