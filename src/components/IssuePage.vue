@@ -11,18 +11,21 @@
         <div>
    <table style="width:100%">
   <tr>
+    <th>Issue Name</th>
     <th>Description</th>
     <th>Status</th>
     <th> Actions</th>
   </tr>
   <tr v-for="item in list" v-bind:key="item.issueId">
+    <td>{{item.issueName}}</td>
     <td>{{item.description}}</td>
     <td>{{item.status}}</td>
     <td>
       <!-- <div v-if="role=='modular'">Start
         Cancel
       </div> -->
-  <a v-bind:href="'/case/'+item.caseId">View</a>
+  <!-- <a v-bind:href="'/case/'+item.caseId">View</a> -->
+  delete
 
       
 
@@ -98,7 +101,7 @@ export default {
     },
     mounted(){
 
-      axios.get('http://localhost:3000/api/test/issues/'+this.id
+      axios.get('http://localhost:3000/api/test/getissue/'+this.id
        
       )
       .then((response)=>{
