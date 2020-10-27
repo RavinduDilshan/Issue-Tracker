@@ -9,7 +9,7 @@
             <b-button v-on:click='redirect' variant="danger">Add Project</b-button>
           </div>
         
-       
+       <br>
 
         <div>
     <table style="width:100%">
@@ -24,15 +24,21 @@
   <tr v-for="item in list" v-bind:key="item.projectId">
     <td>{{item.projectName}}</td>
     <td>{{item.description}}</td>
-    <td>{{item.status}}</td>
+    <td>{{state.value}}</td>
+    <!-- <td>{{item.status}}</td> -->
     <td>{{item.caseCount}}</td>
     <td>{{item.IssueCount}}</td>
     <td>
-      <div v-if="role=='modular'">Start
-        Cancel
-      </div>
+      <div v-if="role=='modular'">
+       <b-button class="btn" variant="success" size="sm" @click="actionService.send('start')">Start</b-button>
+        <b-button class="btn" variant="danger" size="sm" @click="actionService.send('cancel')">Cancel</b-button>
+         <b-button class="btn" size="sm" variant="primary" @click="actionService.send('complete')">Complete</b-button>
+        <b-button class="btn" variant="info" size="sm" @click="actionService.send('holding')">Hold</b-button>
+         <b-button class="btn" variant="warning" size="sm" @click="actionService.send('resume')">Resume</b-button>
       
+      </div>
      <a v-bind:href="'/propage/'+item.projectId">View</a>
+      
     </td>
   </tr>
 </table>
@@ -49,6 +55,8 @@
 <script>
 import axios from 'axios'
 import Header from './layout/Header'
+import {fetchMachine} from './StateMachine/machine'
+import {interpret} from 'xstate'
 
  
 
@@ -88,10 +96,23 @@ export default {
         x:localStorage.getItem("user"),
         role:localStorage.getItem("role"),
         id:'2',
+
+        actionService:interpret(fetchMachine),
+        state:fetchMachine.initialState
     
      
       }
     },
+
+    created(){
+      this.actionService
+      .onTransition(state => this.state=state)
+      .start();
+    },
+
+    destroyed(){
+      this.actionService.stop();
+    }
     
     
 }
@@ -106,5 +127,11 @@ export default {
 table, th, td {
   border: 1px solid black;
 }
+
+.btn{
+  margin-right: 10px;
+}
+
+
 
 </style>

@@ -1,4 +1,4 @@
-
+import {Machine} from 'xstate'
   export const fetchMachine = Machine({
     id:"stmachine",
     initial:"New",
