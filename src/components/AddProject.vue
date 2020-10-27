@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from './layout/Header'
 export default {
     name:'AddProject',
@@ -76,6 +77,17 @@ export default {
       onSubmit(){
           event.preventDefault()
           alert(this.projectname + ' ' + this.description)
+
+        axios.post('http://localhost:3000/api/test/addpro',{
+        projectname:this.projectname,
+        description:this.description
+      }).then(function(response){
+        console.log(response.data);
+        
+
+      }).catch(err=>{
+        console.log(err)
+      });
 
       }
   }
