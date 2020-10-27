@@ -23,14 +23,14 @@
         <div>
     <table style="width:100%">
   <tr>
-    <th>Case Id</th>
+    <th>Case Name</th>
     <th>Status</th>
     <th>Description</th>
     <th>Issue Count</th>
     <th> Actions</th>
   </tr>
   <tr v-for="item in list" v-bind:key="item.projectId">
-    <td>{{item.caseId}}</td>
+    <td>{{item.caseName}}</td>
     <td>{{item.status}}</td>
     <td>{{item.description}}</td>
     <td>{{item.issueNo}}</td>
@@ -140,7 +140,8 @@ export default {
     },
     methods:{
       redirect:function(){
-        window.location.href = '/addcase';
+        window.location.href = '/addcase/'+this.id;
+        
       }
     },
     

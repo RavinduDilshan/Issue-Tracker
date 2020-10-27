@@ -34,7 +34,7 @@ const routes=[
   {path:'/case/:id',component:CasePage},
   {path:'/issue/:id',component:IssuePage},
   {path:'/addpro',component:AddProject},
-  {path:'/addcase',component:AddCase}
+  {path:'/addcase/:id',component:AddCase}
 
 
 

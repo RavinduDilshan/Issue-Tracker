@@ -68,7 +68,8 @@ export default {
     data(){
     return{
       casename:'',
-      description:''
+      description:'',
+      id:this.$route.params.id
   
     }
   },
@@ -76,10 +77,10 @@ export default {
   methods:{
       onSubmit(){
           event.preventDefault()
-          alert(this.projectname + ' ' + 'Added Succesfully')
+          alert(this.casename + ' ' + 'Added Succesfully')
 
-        axios.post('http://localhost:3000/api/test/addpro',{
-        projectname:this.projectname,
+        axios.post('http://localhost:3000/api/test/addcase/'+this.id,{
+        casename:this.casename,
         description:this.description
       }).then(function(response){
         console.log(response.data);
@@ -89,7 +90,7 @@ export default {
         console.log(err)
       });
 
-      window.location.href = '/userdash';
+     window.location.href = '/propage/'+this.id;
 
       }
   }
