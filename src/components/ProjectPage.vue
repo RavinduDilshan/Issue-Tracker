@@ -6,6 +6,8 @@
         <br>
         <h1>Project Id : {{this.id}}</h1>
         <h2>Cases Of This Project</h2>
+        <b-button v-on:click='redirect' variant="danger">Add Case</b-button>
+
         
 
         <div>
@@ -15,7 +17,8 @@
 
 
     </div>
-
+    <br>
+    <br>
     
         <div>
     <table style="width:100%">
@@ -134,7 +137,12 @@ export default {
           id:this.$route.params.id
       
       }
-    }
+    },
+    methods:{
+      redirect:function(){
+        window.location.href = '/addcase';
+      }
+    },
     
 }
 </script>

@@ -6,7 +6,7 @@
         <b-container>
       <b-row class="justify-content-md-center mt-4">
         <b-col col md="8">
-          <b-card header="Add Project"
+          <b-card header="Add Case"
             header-bg-variant="primary"
             header-text-variant="white"
           >
@@ -16,9 +16,9 @@
                 <!-- projectname -->
                 <b-form-group 
                 
-                label="Project Name"
+                label="Case Name"
                 >
-                <b-form-input v-model="projectname" required></b-form-input>
+                <b-form-input v-model="casename" required></b-form-input>
                 </b-form-group>
 
                   
@@ -61,13 +61,13 @@
 import axios from 'axios'
 import Header from './layout/Header'
 export default {
-    name:'AddProject',
+    name:'AddCase',
      components:{
         Header
     },
     data(){
     return{
-      projectname:'',
+      casename:'',
       description:''
   
     }
