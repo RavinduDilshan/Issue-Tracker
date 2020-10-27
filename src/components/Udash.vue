@@ -6,7 +6,7 @@
         <br>
         <h1>All Projects</h1>
         <div v-if="role=='modular'">
-            <b-button variant="danger">Add Project</b-button>
+            <b-button v-on:click='redirect' variant="danger">Add Project</b-button>
           </div>
         
        
@@ -33,13 +33,6 @@
       </div>
       
      <a v-bind:href="'/propage/'+item.projectId">View</a>
-    
-
-      
-
-    
-    
-    
     </td>
   </tr>
 </table>
@@ -64,6 +57,12 @@ export default {
     components:{
         Header
     },
+    methods:{
+      redirect:function(){
+         window.location.href = '/addpro';
+      }
+    },
+
      mounted(){
 
       axios.get('http://localhost:3000/api/test/projects')
