@@ -9,17 +9,19 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro veritatis maxime similique ipsa illo voluptatibus unde fugiat vitae fuga. Itaque aspernatur ducimus, alias dicta repellat nam ab fugit quasi enim!</p>
         </b-container>
         <h1>Issues of this case </h1>
+        <b-button v-on:click='redirect' variant="danger">Add Issue</b-button>
 
+        <br>
         <div>
     <table style="width:100%">
   <tr>
-    <th>Issue Id</th>
-    <th>Status</th>
+    <th>Issue Name</th>
     <th>Description</th>
+     <th>Status</th>
     <th> Actions</th>
   </tr>
   <tr v-for="item in list" v-bind:key="item.issueId">
-    <td>{{item.issueId}}</td>
+    <td>{{item.issueName}}</td>
     <td>{{item.status}}</td>
     <td>{{item.description}}</td>
     
@@ -131,7 +133,13 @@ export default {
            list:[],
           id:this.$route.params.id
       }
-    }
+    },
+    methods:{
+      redirect:function(){
+        window.location.href = '/addissue/'+this.id;
+        
+      }
+    },
     
 }
 </script>

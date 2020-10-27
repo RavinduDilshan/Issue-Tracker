@@ -9,6 +9,7 @@ import CasePage from './components/CasePage'
 import IssuePage from './components/IssuePage'
 import AddProject from './components/AddProject'
 import AddCase from './components/AddCase'
+import AddIssue from './components/AddIssue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
@@ -34,7 +35,8 @@ const routes=[
   {path:'/case/:id',component:CasePage},
   {path:'/issue/:id',component:IssuePage},
   {path:'/addpro',component:AddProject},
-  {path:'/addcase/:id',component:AddCase}
+  {path:'/addcase/:id',component:AddCase},
+  {path:'/addissue/:id',component:AddIssue}
 
 
 
