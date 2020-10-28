@@ -91,7 +91,7 @@
     <div class="viewcomments">
         <b-container>
             <h3>All Comments here</h3>
-            <p>comment1</p>
+            <p>comment 1</p>
             <p>comment2</p>
             <p>comment3</p>
         </b-container>
@@ -134,7 +134,8 @@ export default {
       return {
           comment:'',
           list:[],
-          id:this.$route.params.id
+          id:this.$route.params.id,
+          commenter:localStorage.getItem("user"),
       
       }
     },
@@ -142,6 +143,25 @@ export default {
       redirect:function(){
         window.location.href = '/addcase/'+this.id;
         
+      },
+      onSubmit(){
+          event.preventDefault()
+          alert(this.comment + ' ' + 'Added Succesfully')
+
+        axios.post('http://localhost:3000/api/test/addprojectcomment/'+this.id,{
+        comment:this.comment,
+        commenter:this.commenter
+        
+      }).then(function(response){
+        console.log(response.data);
+        
+
+      }).catch(err=>{
+        console.log(err)
+      });
+
+     window.location.href = '/propage/'+this.id;
+
       }
     },
     
