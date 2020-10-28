@@ -17,13 +17,20 @@
   <tr v-for="item in list" v-bind:key="item.issueId">
     <td>{{item.issueName}}</td>
     <td>{{item.description}}</td>
-    <td>{{item.status}}</td>
+    <td>{{state.value}}</td>
     <td>
       <!-- <div v-if="role=='modular'">Start
         Cancel
       </div> -->
   <!-- <a v-bind:href="'/case/'+item.caseId">View</a> -->
   delete
+      <b-button class="btn" variant="success" size="sm" @click="actionService.send('start')">Start</b-button>
+      <b-button class="btn" variant="danger" size="sm" @click="actionService.send('cancel')">Cancel</b-button>
+      <b-button class="btn" size="sm" variant="primary" @click="actionService.send('complete')">Complete</b-button>
+      <b-button class="btn" variant="info" size="sm" @click="actionService.send('holding')">Hold</b-button>
+      <b-button class="btn" variant="warning" size="sm" @click="actionService.send('resume')">Resume</b-button>
+    
+
 
       
 
@@ -103,6 +110,8 @@
 <script>
 import axios from 'axios'
 import Header from './layout/Header'
+import {fetchMachine} from './StateMachine/machine'
+import {interpret} from 'xstate'
 export default {
     name:'IssuePage',
     components:{
@@ -156,7 +165,10 @@ export default {
         list:[],
           id:this.$route.params.id,
           commenter:localStorage.getItem("user"),
-          commentlist:[]
+          commentlist:[],
+          
+          actionService:interpret(fetchMachine),
+          state:fetchMachine.initialState
       }
     },
 
@@ -181,7 +193,18 @@ export default {
 
       }
 
+    },
+    
+       created(){
+      this.actionService
+      .onTransition(state => this.state=state)
+      .start();
+    },
+
+    destroyed(){
+      this.actionService.stop();
     }
+    
     
 }
 </script>
@@ -194,6 +217,10 @@ export default {
 
 table, th, td {
   border: 1px solid black;
+}
+
+.btn{
+  margin-right: 10px;
 }
 
 </style>
