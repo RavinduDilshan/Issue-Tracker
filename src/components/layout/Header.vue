@@ -3,7 +3,7 @@
     <header class="header">
         <h1>Issue Tracker</h1>
         <h5>wellcome {{x}}</h5>
-        <b-button variant="success">Logout</b-button>
+        <b-button v-on:click='redirect' variant="success">Logout</b-button>
     </header>
 
 
@@ -24,7 +24,17 @@ export default {
         x:localStorage.getItem("user")
        
       }
+    },
+
+    methods:{
+         redirect:function(){
+        window.location.href = '/login';
+        
+      }
     }
+    
+    
+    
 }
 </script>
 

@@ -5,9 +5,7 @@
 
         <br>
         <h1>Issue Id:{{id}}</h1>
-      
-        
-
+        <br>
         <div>
    <table style="width:100%">
   <tr>
@@ -41,7 +39,7 @@
 
     </div>
 
-   
+   <br>
 
     <!-- comment section -->
     
@@ -76,13 +74,24 @@
         </b-container>
 
     </div>
-
+<br>
     <div class="viewcomments">
         <b-container>
-            <h3>All Comments here</h3>
-            <p>comment1</p>
-            <p>comment2</p>
-            <p>comment3</p>
+            <div>
+    <table style="width:100%">
+  <tr>
+    <th>Commenter</th>
+    <th>Comment</th>
+    <th>Actions</th>
+  </tr>
+  <tr v-for="item in commentlist" v-bind:key="item.projectcmtId">
+    <td>{{item.commenter}}</td>
+    <td>{{item.comment}}</td>
+    <td>Reply</td>
+  </tr>
+</table>
+
+    </div>
         </b-container>
 
     </div>
@@ -116,6 +125,28 @@ export default {
         console.log(err)
       })
       ;
+
+      
+        axios.get('http://localhost:3000/api/test/getissuecomments/'+this.id
+       
+      )
+      .then((response)=>{
+        console.log(response.data);
+        this.commentlist=response.data;
+        console.log(this.id);
+      
+        
+        
+
+      }).catch(err=>{
+        console.log(err)
+      })
+      ;
+
+
+
+
+
        
     },
 
@@ -125,6 +156,7 @@ export default {
         list:[],
           id:this.$route.params.id,
           commenter:localStorage.getItem("user"),
+          commentlist:[]
       }
     },
 
@@ -158,6 +190,10 @@ export default {
 
 .pageComponent{
     text-align:center;
+}
+
+table, th, td {
+  border: 1px solid black;
 }
 
 </style>
