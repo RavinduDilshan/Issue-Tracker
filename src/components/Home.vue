@@ -1,20 +1,18 @@
 <template>
-    <div id="home">
-        <h1>Issue Tracker</h1>
-        <div id="nav">
-      
+  <div id="home">
+    <h1>Issue Tracker</h1>
+    <div id="nav">
       <router-link to="/">Register</router-link> |
       <router-link to="/login">Login</router-link>
-     
     </div>
-    <router-view/>
-    </div>
+    <router-view />
+  </div>
 </template>
 
 <script>
 export default {
-    name:'Home'
-}
+  name: "Home",
+};
 </script>
 
 
@@ -39,5 +37,4 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-
 </style>

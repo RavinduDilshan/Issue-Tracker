@@ -26,17 +26,17 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(VueRouter);
 
-const routes=[
+const routes = [
 
-  {path:'/',component:Home},
-  {path:'/login',component:Login},
-  {path:'/userdash',component:Udash},
-  {path:'/propage/:id',component:ProjectPage},
-  {path:'/case/:id',component:CasePage},
-  {path:'/issue/:id',component:IssuePage},
-  {path:'/addpro',component:AddProject},
-  {path:'/addcase/:id',component:AddCase},
-  {path:'/addissue/:id',component:AddIssue}
+  { path: '/', component: Home },
+  { path: '/login', component: Login },
+  { path: '/userdash', component: Udash },
+  { path: '/propage/:id', component: ProjectPage },
+  { path: '/case/:id', component: CasePage },
+  { path: '/issue/:id', component: IssuePage },
+  { path: '/addpro', component: AddProject },
+  { path: '/addcase/:id', component: AddCase },
+  { path: '/addissue/:id', component: AddIssue }
 
 
 
@@ -44,7 +44,7 @@ const routes=[
 
 const router = new VueRouter({
   routes,
-  mode:'history'
+  mode: 'history'
 });
 
 
