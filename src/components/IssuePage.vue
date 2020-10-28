@@ -123,8 +123,32 @@ export default {
       return {
           comment:'',
         list:[],
-          id:this.$route.params.id
+          id:this.$route.params.id,
+          commenter:localStorage.getItem("user"),
       }
+    },
+
+    methods:{
+       onSubmit(){
+          event.preventDefault()
+          alert(this.comment + ' ' + 'Added Succesfully')
+
+        axios.post('http://localhost:3000/api/test/addissuecomment/'+this.id,{
+        comment:this.comment,
+        commenter:this.commenter
+        
+      }).then(function(response){
+        console.log(response.data);
+        
+
+      }).catch(err=>{
+        console.log(err)
+      });
+
+     window.location.href = '/issue/'+this.id;
+
+      }
+
     }
     
 }
