@@ -96,10 +96,12 @@
   <tr>
     <th>Commenter</th>
     <th>Comment</th>
+    <th>Actions</th>
   </tr>
   <tr v-for="item in commentlist" v-bind:key="item.projectcmtId">
     <td>{{item.commenter}}</td>
     <td>{{item.comment}}</td>
+    <td>Reply</td>
   </tr>
 </table>
 
