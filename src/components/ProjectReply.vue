@@ -16,7 +16,7 @@
                 <b-form @submit="onSubmit">
                   <!-- comment -->
                   <b-form-group label="Comment">
-                    <h2>this is the comment</h2>
+                    <h2>{{this.comment}}</h2>
                   </b-form-group>
 
                   <!-- reply -->
@@ -44,54 +44,13 @@
             <th>Reply</th>
             <th>Action</th>
           </tr>
-          <tr v-for="item in list" v-bind:key="item.projectId">
-            <td>{{ item.projectName }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ state.value }}</td>
-            <!-- <td>{{item.status}}</td> -->
-            <td>{{ item.caseCount }}</td>
-            <td>{{ item.IssueCount }}</td>
+          <!-- <tr v-for="item in list" v-bind:key="item.projectId">
+            <td>{{ item.comment }}</td>
             <td>
-              <div v-if="role == 'modular'">
-                <b-button
-                  class="btn"
-                  variant="success"
-                  size="sm"
-                  @click="actionService.send('start')"
-                  >Start</b-button
-                >
-                <b-button
-                  class="btn"
-                  variant="danger"
-                  size="sm"
-                  @click="actionService.send('cancel')"
-                  >Cancel</b-button
-                >
-                <b-button
-                  class="btn"
-                  size="sm"
-                  variant="primary"
-                  @click="actionService.send('complete')"
-                  >Complete</b-button
-                >
-                <b-button
-                  class="btn"
-                  variant="info"
-                  size="sm"
-                  @click="actionService.send('holding')"
-                  >Hold</b-button
-                >
-                <b-button
-                  class="btn"
-                  variant="warning"
-                  size="sm"
-                  @click="actionService.send('resume')"
-                  >Resume</b-button
-                >
-              </div>
+              
               <a v-bind:href="'/propage/' + item.projectId">View</a>
             </td>
-          </tr>
+          </tr> -->
         </table>
       </b-container>
     </div>
@@ -99,7 +58,7 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 import Header from "./layout/Header";
 export default {
   name: "projectReply",
@@ -110,7 +69,20 @@ export default {
     return {
       reply: "",
       id: this.$route.params.id,
+      comment:""
     };
+  },
+
+  mounted(){
+     axios
+      .get("http://localhost:3000/api/test/getprojectcomment/"+this.id)
+      .then((response) => {
+        console.log(response.data);
+        this.comment = response.data[0].comment;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   methods: {
