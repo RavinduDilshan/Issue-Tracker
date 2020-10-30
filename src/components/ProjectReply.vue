@@ -44,8 +44,11 @@
             <th>Reply</th>
             <th>Action</th>
           </tr>
-          <td>1</td>
-          <td>2</td>
+          <tr v-for="item in list" v-bind:key="item.replyId">
+            <td>{{ item.relply }}</td>
+            <td>Reply</td>
+
+          </tr>
         </table>
       </b-container>
     </div>
@@ -64,11 +67,14 @@ export default {
     return {
       reply: "",
       id: this.$route.params.id,
-      comment:""
+      comment:"",
+      list:[]
     };
   },
 
   mounted(){
+
+    //get project comment request
      axios
       .get("http://localhost:3000/api/test/getprojectcomment/"+this.id)
       .then((response) => {
@@ -78,6 +84,19 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+
+
+//get all request to table request
+    axios
+      .get("http://localhost:3000/api/test/getallprojectcommentsreplies/"+this.id)
+      .then((response) => {
+        console.log(response.data);
+        this.list = response.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
   },
 
   methods: {
