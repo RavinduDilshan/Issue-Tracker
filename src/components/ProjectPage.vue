@@ -118,7 +118,7 @@
             <tr v-for="item in commentlist" v-bind:key="item.projectcmtId">
               <td>{{ item.commenter }}</td>
               <td>{{ item.comment }}</td>
-              <td>reply</td>
+              <td>    <a v-bind:href="'/proreply/' + item.projectcmtId">Reply</a></td>
             </tr>
           </table>
         </div>
@@ -222,6 +222,10 @@ td {
 }
 
 .btn {
+  margin-right: 10px;
+}
+
+a {
   margin-right: 10px;
 }
 </style>

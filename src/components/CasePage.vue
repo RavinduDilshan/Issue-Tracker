@@ -228,4 +228,8 @@ td {
 .btn {
   margin-right: 10px;
 }
+
+a{
+  margin-right: 10px;
+}
 </style>

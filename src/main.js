@@ -10,6 +10,7 @@ import IssuePage from './components/IssuePage'
 import AddProject from './components/AddProject'
 import AddCase from './components/AddCase'
 import AddIssue from './components/AddIssue'
+import projectReply from './components/ProjectReply'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
@@ -36,7 +37,8 @@ const routes = [
   { path: '/issue/:id', component: IssuePage },
   { path: '/addpro', component: AddProject },
   { path: '/addcase/:id', component: AddCase },
-  { path: '/addissue/:id', component: AddIssue }
+  { path: '/addissue/:id', component: AddIssue },
+  {path:'/proreply/:id',component:projectReply}
 
 
 

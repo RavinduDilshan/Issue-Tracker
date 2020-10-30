@@ -1,25 +1,48 @@
 <template>
   <div>
     <Header />
-    <div class="pageComponent">
-      <br />
-      <h1>All Projects</h1>
-      <div v-if="role == 'modular'">
-        <b-button v-on:click="redirect" variant="danger">Add Project</b-button>
-      </div>
 
-      <br />
+    <!-- Reply Form -->
+    <div>
+      <b-container>
+        <b-row class="justify-content-md-center mt-4">
+          <b-col col md="8">
+            <b-card
+              header="Add Reply"
+              header-bg-variant="primary"
+              header-text-variant="white"
+            >
+              <b-card-text>
+                <b-form @submit="onSubmit">
+                  <!-- comment -->
+                  <b-form-group label="Comment">
+                    <h2>this is the comment</h2>
+                  </b-form-group>
 
-      <!-- project details table -->
-      <div>
-        <table style="width: 100%">
+                  <!-- reply -->
+                  <b-form-group label="Reply">
+                    <b-form-input v-model="reply" required></b-form-input>
+                  </b-form-group>
+
+                  <!-- submit -->
+                  <b-form-group>
+                    <b-button type="submit" variant="outline-primary"
+                      >Add</b-button
+                    >
+                  </b-form-group>
+                </b-form>
+              </b-card-text>
+            </b-card>
+          </b-col>
+        </b-row>
+
+        <br>
+       <!-- reply table -->
+
+        <table style="width: 100%" class="pageComponent">
           <tr>
-            <th>Project Name</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Case Count</th>
-            <th>Issue Count</th>
-            <th>Actions</th>
+            <th>Reply</th>
+            <th>Action</th>
           </tr>
           <tr v-for="item in list" v-bind:key="item.projectId">
             <td>{{ item.projectName }}</td>
@@ -70,79 +93,45 @@
             </td>
           </tr>
         </table>
-      </div>
+      </b-container>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 import Header from "./layout/Header";
-import { fetchMachine } from "./StateMachine/machine";
-import { interpret } from "xstate";
-
 export default {
-  name: "Udash",
+  name: "projectReply",
   components: {
     Header,
   },
-  methods: {
-    redirect: function () {
-      window.location.href = "/addpro";
-    },
-  },
-
-  mounted() {
-    // get project details request
-    axios
-      .get("http://localhost:3000/api/test/projects")
-      .then((response) => {
-        console.log(response.data);
-        this.list = response.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
   data() {
     return {
-      list: [],
-      x: localStorage.getItem("user"),
-      role: localStorage.getItem("role"),
-      id: "2",
-
-      actionService: interpret(fetchMachine),
-      state: fetchMachine.initialState,
+      reply: "",
+      id: this.$route.params.id,
     };
   },
 
-  created() {
-    this.actionService.onTransition((state) => (this.state = state)).start();
-  },
+  methods: {
+    onSubmit() {
+      event.preventDefault();
+      alert(this.reply + " " + "Added Succesfully");
 
-  destroyed() {
-    this.actionService.stop();
+      window.location.href = "/propage/" + this.id;
+    },
   },
 };
 </script>
 
-<style  scoped>
-.pageComponent {
-  text-align: center;
-}
-
+<style scoped>
 table,
 th,
 td {
   border: 1px solid black;
 }
 
-.btn {
-  margin-right: 10px;
+.pageComponent {
+  text-align: center;
 }
-
-a{
-  margin-right: 10px;
-}
-
 </style>
