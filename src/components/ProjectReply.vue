@@ -44,13 +44,8 @@
             <th>Reply</th>
             <th>Action</th>
           </tr>
-          <!-- <tr v-for="item in list" v-bind:key="item.projectId">
-            <td>{{ item.comment }}</td>
-            <td>
-              
-              <a v-bind:href="'/propage/' + item.projectId">View</a>
-            </td>
-          </tr> -->
+          <td>1</td>
+          <td>2</td>
         </table>
       </b-container>
     </div>
@@ -90,7 +85,19 @@ export default {
       event.preventDefault();
       alert(this.reply + " " + "Added Succesfully");
 
-      window.location.href = "/propage/" + this.id;
+//add reply to project comment
+      axios
+        .post("http://localhost:3000/api/test/addprojectcommentreply/" + this.id, {
+          reply: this.reply,
+        })
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      window.location.href = "/proreply/" + this.id;
     },
   },
 };
